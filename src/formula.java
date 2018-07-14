@@ -1,7 +1,6 @@
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class formula 
 {
@@ -9,7 +8,8 @@ PrimeNumberGenerator png = new PrimeNumberGenerator();
 static PrimeNumberGenerator png2 = new PrimeNumberGenerator();
 String f;
 ArrayList<Integer> set;
-ArrayList<HashMap<ArrayList<formula>, inferenceRule>> derivation;
+
+HashMap<ArrayList<String>, inferenceRule> derivation = new HashMap<ArrayList<String>, inferenceRule>();
 
 public formula(String f)
 {
@@ -138,10 +138,10 @@ public static String arrayToString(ArrayList<Integer> x)
 			{
 				if(input[n] == p)
 				{
-					output[n] = lower.get(0);
+					output[n] = upper.get(0);
 				}
 			}
-			lower.remove(0);
+			upper.remove(0);
 			}
 		}
 	}
@@ -164,7 +164,7 @@ public static String arrayToString(ArrayList<Integer> x)
 		return subFormula;
 	}
 	
-	/** gets the number of "(" characters within the given index */
+	/** gets the number of "(" characters within the given index (where last is endIndex - 1) */
 	public int getNumOuterParen(int beginIndex, int endIndex)
 	{
 		int num = 0;
@@ -175,7 +175,7 @@ public static String arrayToString(ArrayList<Integer> x)
 		return num;
 	}
 	
-	/** gets the number of ")" characters within the given index */
+	/** gets the number of ")" characters within the given index (where last is endIndex - 1)*/
 	public int getNumInnerParen(int beginIndex, int endIndex)
 	{
 		int num2 = 0;
@@ -186,15 +186,28 @@ public static String arrayToString(ArrayList<Integer> x)
 		return num2;
 	}
 	
-	/** adds derivation steps */
-	public void addDerivation(HashMap<ArrayList<formula>, inferenceRule> step)
+	/** adds derivation step given string of the formula (done automatically by the inference rules)*/
+	public void addDerivation(ArrayList<String> s, inferenceRule i)
 	{
-		derivation.add(step);
+		derivation.put(s, i);
 	}
 	
 	/** gets derivation of this formula */
-	public ArrayList<HashMap<ArrayList<formula>, inferenceRule>> getDerivation()
+	public HashMap<ArrayList<String>, inferenceRule> getDerivation()
 	{
 		return derivation;
+	}
+	
+	/**gets the string */
+	
+	public String getStringfromFormula()
+	{
+		return f;
+	}
+	
+	/** Returns true if the formula contained within derives this formula (incomplete)*/
+	public boolean isDerived(formula f)
+	{
+		return true;
 	}
 }

@@ -1,29 +1,24 @@
-import java.util.ArrayList;
 
 public class test 
 {
 	public static void main(String[] args) {
 		formula fo = new formula("(∀z(z∈x↔z∈y)→x=y)");
-		System.out.println(fo.encode());
-		ArrayList<Integer> n = new ArrayList<Integer>();
-		n.add(3);
-		n.add(6);
-		n.add(13);
-		n.add(3);
-		n.add(13);
-		n.add(11);
-		n.add(19);
-		n.add(10);
-		n.add(13);
-		n.add(11);
-		n.add(23);
-		n.add(4);
-		n.add(2);
-		n.add(19);
-		n.add(1);
-		n.add(23);
-		n.add(4);
-		System.out.println(formula.arrayToString(n));
+		formula fo2 = new formula("(∀w∃y∀z(∀yA→z=y)→∃y∀z(z∈y↔∃w(w∈x∧∀yA)))");
+		
+		System.out.println(fo.getDerivation());
+		
+		formula c = conjugationRule.conjugation(fo, fo2);
+		
+		System.out.println(c.getStringfromFormula());
+		
+		
+		System.out.println(c.getDerivation());
+		
+		formulaList.addToFormulas(fo);
+		formulaList.addToFormulas(fo2);
+		formulaList.addToFormulas(c);
+		
+		System.out.println(formulaList.formulas);
 		
 	}
 }

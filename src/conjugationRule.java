@@ -6,6 +6,8 @@ public class conjugationRule extends inferenceRule
 	{
 		ArrayList<Integer> c = new ArrayList<Integer>();
 		
+		c.add(3);
+		
 		for(int i = 0; i < f.encode().size(); i++)
 		{
 			c.add(f.encode().get(i));
@@ -18,7 +20,17 @@ public class conjugationRule extends inferenceRule
 			c.add(g.encode().get(j));
 		}
 		
+		c.add(4);
+		
 		formula cr = new formula(formula.arrayToString(c));
+		
+		//add derivation
+		
+		ArrayList<String>  h = new ArrayList<String>();
+		h.add(f.getStringfromFormula());
+		h.add(g.getStringfromFormula());
+		
+		cr.addDerivation(h, new conjugationRule());
 		
 		return cr;
 	}
