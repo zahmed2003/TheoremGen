@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class formula 
 {
@@ -9,11 +10,12 @@ static PrimeNumberGenerator png2 = new PrimeNumberGenerator();
 String f;
 ArrayList<Integer> set;
 
-HashMap<ArrayList<String>, inferenceRule> derivation = new HashMap<ArrayList<String>, inferenceRule>();
+container derivation;
 
 public formula(String f)
 {
 	this.f = f;
+	
 }
 	
 	/** Returns the set of exponents for the encoding process */
@@ -106,7 +108,8 @@ public static String arrayToString(ArrayList<Integer> x)
 	
 	for(int j = 0; j < input.length; j++)
 	{
-		if (input[j] == 1) 	{output[j] = '=';} 
+		if(input[j] == 0) {}
+		else if (input[j] == 1) 	{output[j] = '=';} 
 		else if (input[j] == 2) {output[j] = '→';} 
 		else if (input[j] == 3) {output[j] = '(';} 
 		else if (input[j] == 4) {output[j] = ')';} 
@@ -128,6 +131,7 @@ public static String arrayToString(ArrayList<Integer> x)
 				if(input[m] == p)
 				{
 					output[m] = lower.get(0);
+					input[m] = 0;
 				}
 			}
 			lower.remove(0);
@@ -139,6 +143,7 @@ public static String arrayToString(ArrayList<Integer> x)
 				if(input[n] == p)
 				{
 					output[n] = upper.get(0);
+					input[n] = 0;
 				}
 			}
 			upper.remove(0);
@@ -189,11 +194,12 @@ public static String arrayToString(ArrayList<Integer> x)
 	/** adds derivation step given string of the formula (done automatically by the inference rules)*/
 	public void addDerivation(ArrayList<String> s, inferenceRule i)
 	{
-		derivation.put(s, i);
+		derivation = new container(s, i);
+		derivationList.formulas.put(this.getStringfromFormula(), derivation);
 	}
 	
 	/** gets derivation of this formula */
-	public HashMap<ArrayList<String>, inferenceRule> getDerivation()
+	public container getDerivation()
 	{
 		return derivation;
 	}
@@ -206,8 +212,34 @@ public static String arrayToString(ArrayList<Integer> x)
 	}
 	
 	/** Returns true if the formula contained within derives this formula (incomplete)*/
-	public boolean isDerived(formula f)
+	public static boolean isDerived(formula result, formula derive)
 	{
-		return true;
+		if(result.getDerivation() == null)
+		{
+			return false;
+		}
+		else if(result.getDerivation().checkStringIsInContainer(derive.getStringfromFormula()))
+		{
+			return true;
+		}
+		else
+		{
+				formula wff = new formula(result.getDerivation().getString(0));
+				if(derivationList.formulas.keySet().contains(wff.getStringfromFormula()))
+				{
+				wff.addDerivation(derivationList.formulas.get(wff.getStringfromFormula()).getFormulae(), derivationList.formulas.get(wff.getStringfromFormula()).getinferenceRule());
+				}
+				return isDerived(wff, derive);
+		}
+		
+	}
+	
+	
+	
+	/** adds the formula to the 2 databases */
+	public void addToDatabases()
+	{
+		derivationList.formulas.put(this.getStringfromFormula(), getDerivation());
+		formulaList.formulas.put(getStringfromFormula(), encode());
 	}
 }
