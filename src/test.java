@@ -2,7 +2,7 @@
 public class test 
 {
 	public static void main(String[] args) {
-		formula fo = new formula("(∀a(a∈b↔a∈c)→b=c)");
+		formula fo = new axiom("(∀a(a∈b↔a∈c)→b=c)");
 		
 		formula fo2 = new axiom("(∀a∃b∀c(∀bA→c=b)→∃b∀c(c∈b↔∃a(a∈d∧∀bA)))");
 		formula fo3 = new axiom("(∃a∀b(∀c(c ∈ b → c ∈ x) → b ∈ a))");
@@ -15,7 +15,7 @@ public class test
 		System.out.println(derivationList.formulas);
 		
 		System.out.println(c.getStringfromFormula());
-		System.out.println(formula.isDerived(c2, fo));
+		System.out.println(formula.isDerived(c, fo3));
 		
 		
 	}
