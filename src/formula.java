@@ -15,6 +15,7 @@ container derivation;
 public formula(String f)
 {
 	this.f = f;
+	formulaList.formulas.put(this, encode());
 	
 }
 	
@@ -23,7 +24,7 @@ public ArrayList<Integer> encode()
 {
 	char[] input = f.toCharArray();
 	int[] output = new int[f.codePointCount(0, f.length())];
-	int[] primes = png.primeGenerator(100 + f.length());
+	int[] primes = png.primeGenerator(1000 + f.length());
 	
 	ArrayList<Integer> set = new ArrayList<Integer>();
 	
@@ -240,6 +241,6 @@ public static String arrayToString(ArrayList<Integer> x)
 	public void addToDatabases()
 	{
 		derivationList.formulas.put(this.getStringfromFormula(), getDerivation());
-		formulaList.formulas.put(getStringfromFormula(), encode());
+		formulaList.formulas.put(this, encode());
 	}
 }
