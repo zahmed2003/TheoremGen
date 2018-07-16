@@ -1,14 +1,14 @@
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
 public class formula 
 {
-PrimeNumberGenerator png = new PrimeNumberGenerator();
-static PrimeNumberGenerator png2 = new PrimeNumberGenerator();
 String f;
 ArrayList<Integer> set;
+ArrayList<Integer> primes;
 
 container derivation;
 
@@ -24,7 +24,10 @@ public ArrayList<Integer> encode()
 {
 	char[] input = f.toCharArray();
 	int[] output = new int[f.codePointCount(0, f.length())];
-	int[] primes = png.primeGenerator(1000 + f.length());
+	if(f.length()*f.length() > formulaList.getLargestFormulaLength()) 
+	{
+	primes = PrimeNumberGenerator.primeGenerator(f.length()*f.length());
+	}
 	
 	ArrayList<Integer> set = new ArrayList<Integer>();
 	
@@ -46,23 +49,27 @@ public ArrayList<Integer> encode()
 		else if (input[i] == '⊥') {output[i] = 12;}
 		else
 		{
-			int c = input[i];
 			
-			if(Character.isLowerCase(input[i]))
+			if(Character.isLowerCase(input[i]) && Character.isDigit(input[i + 1]))
 			{	
-				for(int j = 0; j < input.length; j++) {if(input[j] == c) 
+				char c = input[i];
+				int d = input[i + 1];
+				for(int j = 0; j < input.length; j++) {if(input[j] == c && input[j + 1] == d) 
 				{
-					output[j] = primes[loc + 2];
+					output[j] = primes.get(loc + 2);
 					}
 				}
 				loc++;
 			}
 			
-			else if(Character.isUpperCase(input[i]))
+			else if(Character.isUpperCase(input[i]) && Character.isDigit(input[i + 1]))
 			{	
-				for(int k = 0; k < input.length; k++) {if(input[k] == c) 
+				char c = input[i];
+				int d = input[i + 1];
+				
+				for(int k = 0; k < input.length; k++) {if(input[k] == c && input[k + 1] == d) 
 				{
-					output[k] = primes[loc + 2] + 1;
+					output[k] = primes.get(loc + 2) + 1;
 					
 				}
 				}
@@ -76,6 +83,8 @@ public ArrayList<Integer> encode()
 		set.add(output[l]);
 	}
 	
+	set.removeAll(Arrays.asList(0));
+	
 	return set;
 }
 
@@ -83,59 +92,47 @@ public ArrayList<Integer> encode()
 public static String arrayToString(ArrayList<Integer> x)
 {
 	int[] input = new int[x.size()];
-	char[] output = new char[x.size()];
+	String[] output = new String[x.size()];
 	String o = "";
-	
-	int[] primes1 = png2.primeGenerator(100 + x.size());
-	ArrayList<Integer> primes = new ArrayList<Integer>();;
-	
-	for(int n = 0; n < primes1.length; n++)
-	{
-		primes.add(primes1[n]);
-	}
 	
 	for(int i = 0; i < x.size(); i++)
 	{
 		input[i] = x.get(i);
 	}
 	
-	variables v = new variables();
-	ArrayList<Character> upper = new ArrayList<Character>();
-	ArrayList<Character> lower = new ArrayList<Character>();
-	
-	for(int k = 0; k < v.lowerCase.length; k++) {lower.add(v.lowerCase[k]);}
-	for(int l = 0; l < v.UpperCase.length; l++) {upper.add(v.UpperCase[l]);}
-	
+	ArrayList<String> upper = new variables().UpperCase;
+	ArrayList<String> lower = new variables().lowerCase;
+	int c = 0;
 	
 	for(int j = 0; j < input.length; j++)
 	{
 		if(input[j] == 0) {}
-		else if (input[j] == 1) 	{output[j] = '=';} 
-		else if (input[j] == 2) {output[j] = '→';} 
-		else if (input[j] == 3) {output[j] = '(';} 
-		else if (input[j] == 4) {output[j] = ')';} 
-		else if (input[j] == 5) {output[j] = '¬';} 
-		else if (input[j] == 6) {output[j] = '∀';} 
-		else if (input[j] == 7) {output[j] = '∃';} 
-		else if (input[j] == 8) {output[j] = '∧';} 
-		else if (input[j] == 9) {output[j] = '∨';} 
-		else if (input[j] == 10) {output[j] = '↔';} 
-		else if (input[j] == 11) {output[j] = '∈';} 
-		else if (input[j] == 12) {output[j] = '⊥';}
+		else if (input[j] == 1) 	{output[j] = "=";} 
+		else if (input[j] == 2) {output[j] = "→";} 
+		else if (input[j] == 3) {output[j] = "(";} 
+		else if (input[j] == 4) {output[j] = ")";} 
+		else if (input[j] == 5) {output[j] = "¬";} 
+		else if (input[j] == 6) {output[j] = "∀";} 
+		else if (input[j] == 7) {output[j] = "∃";} 
+		else if (input[j] == 8) {output[j] = "∧";} 
+		else if (input[j] == 9) {output[j] = "∨";} 
+		else if (input[j] == 10) {output[j] = "↔";} 
+		else if (input[j] == 11) {output[j] = "∈";} 
+		else if (input[j] == 12) {output[j] = "⊥";}
 		else
 		{
 		int p = input[j];
-		if(primes.contains(p))
+		if(PrimeNumberGenerator.primes.contains(p))
 			{
 			for(int m = 0; m < input.length; m++)
 			{
 				if(input[m] == p)
 				{
-					output[m] = lower.get(0);
+					output[m] = lower.get(c);
 					input[m] = 0;
 				}
 			}
-			lower.remove(0);
+			c++;
 			}
 		else
 		{
@@ -143,11 +140,11 @@ public static String arrayToString(ArrayList<Integer> x)
 			{
 				if(input[n] == p)
 				{
-					output[n] = upper.get(0);
+					output[n] = upper.get(c);
 					input[n] = 0;
 				}
 			}
-			upper.remove(0);
+			c++;
 			}
 		}
 	}

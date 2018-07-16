@@ -3,10 +3,10 @@ import java.util.ArrayList;
 public class PrimeNumberGenerator 
 {
 
-	ArrayList<Integer> primes;
+	static ArrayList<Integer> primes;
 	
 	
-	public int[] primeGenerator(int n)
+	public static ArrayList<Integer> primeGenerator(int n)
     {
 		primes = new ArrayList<Integer>();
         // Create a boolean array "prime[0..n]" and initialize
@@ -34,14 +34,8 @@ public class PrimeNumberGenerator
                 primes.add(i);
         }
         
-       int[] realPrimes = new int[primes.size()];
        
-       for(int i = 0; i < primes.size(); i++)
-       {
-    	   realPrimes[i] = primes.get(i);
-       }
-       
-       return realPrimes;
+       return primes;
     }
 
 }
