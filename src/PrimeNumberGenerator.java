@@ -34,7 +34,12 @@ public class PrimeNumberGenerator
                 primes.add(i);
         }
         
-       
+        primes.remove(Integer.valueOf(2));
+        primes.remove(Integer.valueOf(3));
+        primes.remove(Integer.valueOf(5));
+        primes.remove(Integer.valueOf(7));
+        primes.remove(Integer.valueOf(11));
+        
        return primes;
     }
 

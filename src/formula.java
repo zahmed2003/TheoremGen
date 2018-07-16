@@ -1,8 +1,6 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Random;
 
 public class formula 
 {
@@ -53,11 +51,36 @@ public ArrayList<Integer> encode()
 			if(Character.isLowerCase(input[i]) && Character.isDigit(input[i + 1]))
 			{	
 				char c = input[i];
-				int d = input[i + 1];
-				for(int j = 0; j < input.length; j++) {if(input[j] == c && input[j + 1] == d) 
+				int n = 1;
+				String s1 = "";
+				
+				while(Character.isDigit(input[i + n]))
 				{
-					output[j] = primes.get(loc + 2);
+					s1 += input[i + n];
+					n++;
+					
+				}
+		
+				for(int j = 0; j < input.length; j++) 
+				{
+					if(input[j] == c)
+					{
+						int n1 = 1;
+						String s2 = "";
+						while(Character.isDigit(input[j + n1]))
+						{
+							s2 += input[j + n1];
+							n1++;
+							
+						}
+						if(n == n1 && s1.equals(s2))
+						{
+							output[j] = primes.get(loc);
+						}
 					}
+				{
+					
+				}
 				}
 				loc++;
 			}
@@ -65,11 +88,34 @@ public ArrayList<Integer> encode()
 			else if(Character.isUpperCase(input[i]) && Character.isDigit(input[i + 1]))
 			{	
 				char c = input[i];
-				int d = input[i + 1];
+				int n = 1;
+				String s1 = "";
 				
-				for(int k = 0; k < input.length; k++) {if(input[k] == c && input[k + 1] == d) 
+				while(Character.isDigit(input[i + n]))
 				{
-					output[k] = primes.get(loc + 2) + 1;
+					s1 += input[i + n];
+					n++;
+					
+				}
+		
+				for(int j = 0; j < input.length; j++) 
+				{
+					if(input[j] == c)
+					{
+						int n1 = 1;
+						String s2 = "";
+						while(Character.isDigit(input[j + n1]))
+						{
+							s2 += input[j + n1];
+							n1++;
+							
+						}
+						if(n == n1 && s1.equals(s2))
+						{
+							output[j] = primes.get(loc) + 1;
+						}
+					}
+				{
 					
 				}
 				}
@@ -100,8 +146,8 @@ public static String arrayToString(ArrayList<Integer> x)
 		input[i] = x.get(i);
 	}
 	
-	ArrayList<String> upper = new variables().UpperCase;
-	ArrayList<String> lower = new variables().lowerCase;
+	ArrayList<String> upper = variables.UpperCase;
+	ArrayList<String> lower = variables.lowerCase;
 	int c = 0;
 	
 	for(int j = 0; j < input.length; j++)

@@ -7,6 +7,7 @@ public class test
 		new Thread(() -> {variables.addElements();}).start();
 		logic.inputAxiomsFromTextFile("src/axioms"); 
 		
+		
 	}
 	
 }
