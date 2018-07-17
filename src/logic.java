@@ -55,9 +55,24 @@ public class logic
 	/** a method that iterates through each inference rule (update later when more rules)*/
 	public static void iterateThroughRules()
 	{
-		formula wff = conjugationRule.conjugation(randomSelection(), randomSelection());
-		System.out.println(wff.getStringfromFormula());
-	}
+		formula wff1 = conjugationRule.conjugation(randomSelection(), randomSelection());
+			System.out.println(wff1.getStringfromFormula());
+			
+		formula wff2 = conjugationERuleA.conjugationEA(randomSelection());
+		if(wff2 != null){
+			System.out.println(wff2.getStringfromFormula());	
+		}
+			
+		formula wff3 = conjugationERuleB.conjugationEB(randomSelection());
+		if(wff3 != null){
+			System.out.println(wff3.getStringfromFormula());	
+		}
+		
+		formula wff4 = implicationRule.isImplied(randomSelection(), randomSelection());
+		if(wff4 != null){
+			System.out.println(wff3.getStringfromFormula());	
+		}
+		}
 	
 	/** begins the process */
 	public static void beginLoop()

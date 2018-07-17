@@ -255,7 +255,7 @@ public static String arrayToString(ArrayList<Integer> x)
 		return f;
 	}
 	
-	/** Returns true if the formula contained within derives this formula (incomplete)*/
+	/** Returns true if the "derive" derives "result" */
 	public static boolean isDerived(formula result, formula derive)
 	{
 		if(result.getDerivation() == null)
