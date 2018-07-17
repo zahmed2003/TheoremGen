@@ -208,7 +208,7 @@ public static String arrayToString(ArrayList<Integer> x)
 		ArrayList<Integer> subFormula = new ArrayList<Integer>();
 		for(int i = beginIndex; i < endIndex; i++)
 		{
-			subFormula.add(set.get(i));
+			subFormula.add(encode().get(i));
 		}
 		return subFormula;
 	}
@@ -219,7 +219,7 @@ public static String arrayToString(ArrayList<Integer> x)
 		int num = 0;
 		for(int i = beginIndex; i < endIndex; i++)
 		{
-			if(set.get(i) == 3) {num +=1;}
+			if(encode().get(i) == 3) {num +=1;}
 		}
 		return num;
 	}
@@ -230,7 +230,7 @@ public static String arrayToString(ArrayList<Integer> x)
 		int num2 = 0;
 		for(int i = beginIndex; i < endIndex; i++)
 		{
-			if(set.get(i) == 4) {num2 +=1;}
+			if(encode().get(i) == 4) {num2 +=1;}
 		}
 		return num2;
 	}
