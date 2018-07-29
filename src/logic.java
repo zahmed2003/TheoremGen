@@ -68,10 +68,10 @@ public class logic
 			System.out.println(wff3.getStringfromFormula());	
 		}
 		
-		formula wff4 = implicationRule.isImplied(randomSelection(), randomSelection());
+		/* formula wff4 = implicationRule.isImplied(randomSelection(), randomSelection());
 		if(wff4 != null){
 			System.out.println(wff3.getStringfromFormula());	
-		}
+		} */
 		}
 	
 	/** begins the process */

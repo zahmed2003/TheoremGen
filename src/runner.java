@@ -1,18 +1,22 @@
-import java.util.ArrayList;
 
 public class runner 
 {
 	
 	public static void main(String[] args) 
 	{
-		new Thread(() -> {
+		 new Thread(() -> {
 			variables.addElements();
 		}).start();
 		
-		 new Thread(() -> {
+		/*  new Thread(() -> {
 			logic.inputAxiomsFromTextFile("src/axioms");
 			logic.beginLoop();
-		}).start(); 
+		}).start(); */
+		
+		formula f = new formula("(a1=a1)");
+		formula g = new formula("((a1=a1)→(a1))");
+		
+		System.out.println(g.formulaContains(f));
 		
 }
 }

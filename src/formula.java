@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class formula 
 {
@@ -276,6 +277,39 @@ public static String arrayToString(ArrayList<Integer> x)
 				return isDerived(wff, derive);
 		}
 		
+	}
+	
+	/** checks if the formula is contained within*/
+	
+	public boolean formulaContains(formula f)
+	{
+		
+		
+		if(formula.removeIntegers(this).contains(formula.removeIntegers(f))) {
+			
+			int start = formula.removeIntegers(this).indexOf(formula.removeIntegers(f));
+			System.out.println(start);
+			return true;
+			
+			
+			
+		}
+		else {return false;}
+	}
+		
+			
+	public static String removeIntegers(formula f)
+	{
+		String returned = "";
+		
+		for(int i = 0; i < f.getStringfromFormula().length(); i++)
+		{
+			if(Character.isDigit(f.getStringfromFormula().charAt(i)) == false) {
+				returned += f.getStringfromFormula().charAt(i);
+				}
+		}
+		
+		return returned;
 	}
 	
 	
